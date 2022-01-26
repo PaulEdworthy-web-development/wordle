@@ -1,0 +1,8 @@
+Bugs
+
+  Currently turns yellow if misplaced but already green
+    Test Word = GUESS
+    With G already green, it shows yellow in other positions
+      guessing GREEN makes the G green
+      the next guess is BARGE, the yellow is green but should be gray
+      
