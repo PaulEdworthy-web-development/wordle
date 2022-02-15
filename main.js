@@ -1,6 +1,5 @@
 const board = document.querySelector('.game__container')
 const keyboard = document.querySelector('.game__keyboard')
-const keys = Array.from(document.querySelectorAll('.key'))
 
 const secretWord = 'guess'
 const wordLength = 5;
@@ -27,45 +26,51 @@ function buildGameBoard() {
 }
 let boardRow = board.firstChild
 
-document.addEventListener('keyup', (e) => {
-
+document.addEventListener('keydown', (e) => {
   let letter = e.key.toLowerCase()
   if (letter === 'enter') {
     checkWinner()
   }
   if (/^[a-z]$/.test(letter)) {
     currentWord += letter
-    updateBoard()
+    updateBoard(letter)
   }
 })
 
-function updateBoard() {
+function updateBoard(letter) {
   let tile = boardRow.firstChild
   
   for (let i = 0; i < currentWord.length; i++) {
     tile.textContent = currentWord[i]
-    updateBackground(tile, i)
+    updateBackground(tile, i, letter)
     tile = tile.nextSibling
   }
 }
 
-function updateKeyboard(letter) {
-  keys.forEach( key => {
+function updateKeyboard(letter, status) {
+  console.log(letter, status)
+
+  keys.forEach(key => {
+    if (key.classList.contains(letter)) {
+      key.classList.add(status)
+    }
   })
 }
-// if ((key.textContent.toLowerCase() === letter) && (currentWord.includes(letter))) {
-//   key.classList.add('misplaced')
-// }
 
-function updateBackground(tile, i) {
+function updateBackground(tile, i, letter) {
+  let status = ''
+
   if(secretWord[i] === currentWord[i]) {
-    tile.classList.add('correct')
+    status = 'correct'
+    tile.classList.add(status)
   } else if (secretWord.includes(currentWord[i])){
-    tile.classList.add('misplaced')
+    status = 'misplaced'
+    tile.classList.add(status)
   } else {
-    tile.classList.add('wrong')
+    status = 'wrong'
+    tile.classList.add(status)
   }
-  // updateKeyboard()
+  updateKeyboard(letter, status)
   tile.style.border = 'none'
 }
 
@@ -85,13 +90,9 @@ function checkWinner() {
   boardRow = boardRow.nextSibling
 }
 
-// Build the keyboard
-const firstRow = 'qwertyuiop'
-const secondRow = 'asdfghjkl'
-const thirdRow = 'zxcvbnm'
-buildKeyboard(firstRow)
-buildKeyboard(secondRow)
-buildKeyboard(thirdRow)
+buildKeyboard('qwertyuiop')
+buildKeyboard('asdfghjkl')
+buildKeyboard('zxcvbnm')
 
 function buildKeyboard(keyboardRow) {
 
@@ -100,9 +101,12 @@ function buildKeyboard(keyboardRow) {
 
   for (let j = 0; j < keyboardRow.length; j++) {
     let key = document.createElement('div')
-    key.className = 'key'
+    // also add the class of the lowercase char to make comparison easier
+    key.className = `key ${keyboardRow[j]}`
     key.textContent = keyboardRow[j]
     row.appendChild(key)
   }
   keyboard.appendChild(row)
 }
+
+const keys = Array.from(document.querySelectorAll('.key'))

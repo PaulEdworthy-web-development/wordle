@@ -8,6 +8,11 @@
   --color-warning: #B59F3B;
 }
 
+/* CSS debugging */
+/* * {
+  outline: 1px solid red;
+} */
+
 * {
   color: #fff;
   text-transform: uppercase;
@@ -81,3 +86,10 @@ h1 {
   line-height: 40px;
   width: 30px;
 }
+
+/* check to make sure class was added */
+/* .w,
+.s,
+.x {
+  background-color: yellow;
+} */
