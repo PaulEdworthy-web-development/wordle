@@ -46,6 +46,7 @@ h1 {
 
 .container {
   background-color: var(--color-bg-grey);
+  border: 1px solid var(--color-white);
   border-radius: 5px;
   width: 400px;
 }
@@ -57,6 +58,11 @@ h1 {
   flex-direction: column;
   justify-content: center;
   margin-bottom: 1rem;
+}
+
+.game__keyboard {
+  border-top: 1px solid var(--color-white);
+  padding-top: 1rem;
 }
 
 .game__row,
@@ -86,10 +92,3 @@ h1 {
   line-height: 40px;
   width: 30px;
 }
-
-/* check to make sure class was added */
-/* .w,
-.s,
-.x {
-  background-color: yellow;
-} */

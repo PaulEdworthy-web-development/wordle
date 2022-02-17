@@ -31,11 +31,17 @@ document.addEventListener('keydown', (e) => {
   if (letter === 'enter') {
     checkWinner()
   }
+
+  if (letter === 'backspace') {
+    removeLastLetter()
+  }
+
   if (/^[a-z]$/.test(letter)) {
     currentWord += letter
     updateBoard(letter)
   }
-})
+  console.log(currentWord)
+}) // todo refactor to remove multple if's
 
 function updateBoard(letter) {
   let tile = boardRow.firstChild
@@ -47,12 +53,18 @@ function updateBoard(letter) {
   }
 }
 
+function removeLastLetter() {
+  let len = currentWord.length
+  currentWord = currentWord.substring(0, len - 1)
+}
+
 function updateKeyboard(letter, status) {
   console.log(letter, status)
 
   keys.forEach(key => {
     if (key.classList.contains(letter)) {
       key.classList.add(status)
+      key.style.border = 'none'
     }
   })
 }
