@@ -25,6 +25,8 @@ function buildGameBoard() {
   }
 }
 let boardRow = board.firstChild
+let firstTile = boardRow.firstChild
+firstTile.style.border = "3px solid #538D4E"
 
 document.addEventListener('keydown', (e) => {
   let letter = e.key.toLowerCase()
@@ -45,11 +47,12 @@ document.addEventListener('keydown', (e) => {
 
 function updateBoard(letter) {
   let tile = boardRow.firstChild
-  
+
   for (let i = 0; i < currentWord.length; i++) {
     tile.textContent = currentWord[i]
     updateBackground(tile, i, letter)
     tile = tile.nextSibling
+    tile.style.border = "2px solid #538D4E"
   }
 }
 
@@ -91,7 +94,7 @@ function checkWinner() {
     if (currentWord === secretWord) {
       alert('WINNER!')
     }
-  } 
+  }
   wordsGuessed.push(currentWord)
   currentWord = ''
 
@@ -100,6 +103,7 @@ function checkWinner() {
   }
 
   boardRow = boardRow.nextSibling
+  boardRow.firstChild.style.border = "2px solid #538D4E"
 }
 
 buildKeyboard('qwertyuiop')
