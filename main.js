@@ -59,10 +59,11 @@ function updateBoard(letter) {
 function removeLastLetter() {
   let len = currentWord.length
   currentWord = currentWord.substring(0, len - 1)
+  updateBoard()
 }
 
 function updateKeyboard(letter, status) {
-  console.log(letter, status)
+  // console.log(letter, status)
 
   keys.forEach(key => {
     if (key.classList.contains(letter)) {
